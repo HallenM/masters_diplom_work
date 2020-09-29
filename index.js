@@ -12,9 +12,9 @@ var countValues = 0;
 var typeName = "complex";
 
 //CouchDB begin
-var couchDB_baseURL = "http://hpccloud.ssd.sscc.ru:5984/aka/";
-var couchDB_username = "admin";
-var couchDB_password = "akaCoachPass19";
+var couchDB_baseURL = "http://hpccloud.ssd.sscc.ru:number_port/aka/";
+var couchDB_username = "*******";
+var couchDB_password = "***********";
 
 
 function addNewTypeObj(){
@@ -29,7 +29,6 @@ function addNewTypeObj(){
 	} else {
 		labelName.innerHTML = "Type of object" + (count + 1);
 	}
-	//labelName.innerHTML = "Type of object" + (count + 1);
 	divName.appendChild(labelName);
 	divGeneral.appendChild(divName);
 
@@ -124,7 +123,6 @@ function deleteTypeElem(){
 	if (divGeneral.childNodes.length > 0) {
 		countOfElems[count - 1]--;
 		divGeneral.removeChild(element);
-		//console.log("div_after_delete  " + divGeneral.outerHTML);
 	}
 }
 
@@ -496,7 +494,6 @@ function deleteEnumValue() {
 	if (divGeneral.childNodes.length > 0) {
 		countValues--;
 		divGeneral.removeChild(element);
-		//console.log("div_after_delete  " + divGeneral.outerHTML);
 	}
 }
 
@@ -522,21 +519,12 @@ function saveTypeObject(){
 			}
 
 			saveSetOfObjectType(nameObj);
-
-			/*count = 0;
-			var len = countOfElems.length;
-			for(var i = 0; i < len; i++){
-				countOfElems.pop();
-			}*/
 		}
 	} else if(typeName == "enum") { 							// it's enum
 		saveEnumType();
-		//countValues = 0;
 	} else {													// it's inheritance
 		saveInheritanceType();
 	}
-
-	//$('#myTab a[href="#app10"]').tab('show');
 }
 
 function saveInheritanceType() {
@@ -548,7 +536,6 @@ function saveInheritanceType() {
 	type.title = document.getElementById("general_inheritance_name").value;
 	type.type = "object";
 	var obj = new Object();
-	//var mas = [];
 	var inheritedName = document.getElementById("inherited_name").value;
 	var item = findType(inheritedName);
 	obj.inherited_type = {$ref: item.value.$id};
@@ -567,8 +554,7 @@ function saveInheritanceType() {
 			elem.enum = item.value.enum;
 		}
 
-		obj[nameElem] = elem;
-		//mas[j] = nameElem;	
+		obj[nameElem] = elem;	
 	}
 
 	type.properties = obj;
@@ -578,7 +564,7 @@ function saveInheritanceType() {
 
 function getAllTypes(fn) {
 	var xhr = new XMLHttpRequest();
-	var url = couchDB_baseURL + "_design/cms/_view/types";//'http://hpccloud.ssd.sscc.ru:5984/aka/_design/cms/_view/types';
+	var url = couchDB_baseURL + "_design/cms/_view/types";
 
 	xhr.open("GET", url, false, couchDB_username, couchDB_password);
 	xhr.setRequestHeader("Content-type", "application/json");
@@ -626,8 +612,7 @@ function saveComplexType(id) {
 }
 
 function findIdCM() {
-	// сделать поиск id в текущей ВМ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	return "8c148c57925872f233d11639ea023810";
+	return "8c148c55647642fg5872f233d11653533023810";
 }
 
 function findType(nameType) {
@@ -684,7 +669,6 @@ function saveEnumType() {
 
 function sendSaveRequest(data) {
 	var xhr = new XMLHttpRequest();
-    //var url = 'http://hpccloud.ssd.sscc.ru:5984/aka';
     xhr.open("POST", couchDB_baseURL, true, couchDB_username, couchDB_password);
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 
