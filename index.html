@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Интерфейсная система для работы с вычислительными моделями</title>
+
+  <!--<meta charset="utf-8"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- <link rel="stylesheet" href="graph-creator.css" /> -->
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <link rel="shortcut icon" href="">
+
+  <!-- ################## Extenal libraries #################### -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.9/css/bootstrap-select.min.css"
+    crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+    integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+    integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.9/js/bootstrap-select.min.js"
+    crossorigin="anonymous"></script>
+
+  <!-- ################## end of Extenal libraries #################### -->
+  
+  <script type="text/javascript" src="index.js"></script>
+  <script type="text/javascript" src="view.js"></script>
+
+</head>
+
+
+<body>
+
+  <div class="container-fluid">
+  <h1>Aka: Интерфейсная система для работы с вычислительными моделями</h1>
+
+  <!-- Declaration of all tabs -->
+  <ul class="nav nav-tabs" id="myTab">
+    <li><a data-toggle="tab" href="#app6">Демо-магазин</a></li>
+	<li><a class="nav-link" id="set-type-obj-tab" data-toggle="tab" href="#app9">Define a new type</a></li>
+    <li><a class="nav-link" id="set-obj-tab" data-toggle="tab" href="#app10">View defined types</a></li>
+    <li><a data-toggle="tab" href="#list-of-problems-tab" id="app4">Jobs</a></li>
+    <li><a data-toggle="tab" href="#app5">Solve jobs</a></li>
+  </ul>
+
+</div>
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade in active" id="app6" role="tabpanel" aria-labelledby="store-tab">
+	<p>Демо-магазин is here</p>
+  </div>
+  <div class="tab-pane fade" id="app3" role="tabpanel" aria-labelledby="area-dev-tab">
+	<p>Среда разработки вычислительных моделей is here</p>
+  </div>
+  <div class="tab-pane fade" id="list-of-problems-tab" role="tabpanel" aria-labelledby="problem-table-tab">
+	<p>Список задач на моделях is here</p>
+  </div>
+  <div class="tab-pane fade" id="app5" role="tabpanel" aria-labelledby="form-tab">
+	<p>Решения задач на моделях is here</p>
+  </div>
+  
+  <style>
+
+  </style>
+  
+  <div class="tab-pane fade" id="app10" role="tabpanel" aria-labelledby="set-obj-tab">
+	<div id="set_of_object_form">
+		<h3>Add objects</h3>
+		<div id="add_new_obj_form">
+			<table class="layer">
+				<tr> 
+					<td>
+						<div id="buttons_add" class="form-group"></div>
+            <div class="change-group">
+              <button id="save_obj" onclick="saveObjects()" type="button" class="btn btn-outline-primary">Save data & Run</button>
+            </div>
+					</td>
+				</tr>
+        <tr>
+          <td> </td>
+          <td>
+            <div id="input_area" class="form-group"></div>
+          </td>
+        </tr>
+			</table>
+		</div>
+	</div>
+  </div>
+
+  <div class="tab-pane fade" id="app9" role="tabpanel" aria-labelledby="set-type-obj-tab">
+  <div id="set_of_type_object_form">
+    <h3>Define a new type</h3>
+    <div id="add_new_obj_form">
+      <table class="layer">
+        <tr> 
+          <td>
+            <div class="type-group">
+              <label for="list_of_types">Chose class of type for creation</label>
+              <select id="list_of_types">
+                <option value="complex">Complex type</option>
+                <option value="set-of-objects">Set-of-objects type</option>
+                <option value="enum">Enum type</option>
+                <option value="inheritance">Inheritance type</option>
+              </select>
+              <button id="ok_type_obj" onclick="viewType()" type="button" class="btn btn-outline-primary">Ok</button>
+            </div>
+            <div class="change-group">
+              <button id="save_type_obj" onclick="saveTypeObject()" type="button" class="btn btn-outline-primary">Save type of object</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            
+          </td>
+          <td>
+            <div id="input_area_type" class="form-group"></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  </div>
+</div>
+
+</div>
+  
+</body>
+</html>
