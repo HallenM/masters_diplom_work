@@ -8,9 +8,9 @@ var nameSelect;
 var res;
 
 //CouchDB begin
-var couchDB_baseURL = "http://hpccloud.ssd.sscc.ru:5984/aka/";
-var couchDB_username = "admin";
-var couchDB_password = "akaCoachPass19";
+var couchDB_baseURL = "http://hpccloud.ssd.sscc.ru:numb_port/aka/";
+var couchDB_username = "*****";
+var couchDB_password = "***********";
 
 $(function(){
 	$('#myTab a[href="#app10"]').on('show.bs.tab', function () {
@@ -52,7 +52,6 @@ $(function(){
 
 		divGeneral.appendChild(div);
 		inputArea.appendChild(divGeneral);
-		//countOfElems.push(0);
 	})
 })
 
@@ -127,10 +126,8 @@ function checkType(div, item) {
 	}
 }
 
-// Сделать одну ф-ю из двух
 function findViewType(nameType) {
 	var item;
-	// Возможно тут нужно сначала получать список всех типов
 	res.forEach(function (items) {
 		if (items.value.title == nameType) {
 			item = items;			
@@ -138,9 +135,9 @@ function findViewType(nameType) {
 	});
 	return item;
 }
+
 function findTypeById(idType) {
 	var item;
-	// Возможно тут нужно сначала получать список всех типов
 	res.forEach(function (items) {
 		if (items.value.$id == idType) {
 			item = items;			
@@ -226,7 +223,7 @@ function addComplexType(div, item, id) {
 
 	var divName = document.createElement('div_name_' + item.value.title);
 	var labelName = document.createElement('label');
-	if (countOfElems.length == 0) { // было == 1
+	if (countOfElems.length == 0) {
 		labelName.innerHTML = item.value.title;
 	} else {
 		labelName.innerHTML = item.value.title + (countOfElems[id] + 1);
@@ -284,7 +281,6 @@ function addSetOfObjectsType(div, item) {
 	// Список доступных объектов
 	var objects = item.value.items.anyOf;
 	var value = [];
-	// было len - 1
 	for(var i = 0; i < objects.length/* - 1*/; i++){
 		var tmp = objects[i].$ref.split(/[/:]+/);
 		value[i] = tmp[2];
@@ -353,7 +349,6 @@ function deleteObject(){
 function addEnumType(div, namesType) {
 	
 	var item = findViewType(namesType);
-	//var value = item.value.enum;
 	addSelect(div, "select_" + namesType, item.value.enum, item.value.enum);
 }
 
@@ -412,12 +407,10 @@ function addStringElement(div) {
 	div.appendChild(input);
 }
 
-function addDoubleElement(div) {
-	
+function addDoubleElement(div) {	
 }
 
-function addFloatElement(div) {
-	
+function addFloatElement(div) {	
 }
 
 function addFileElement(div) {
@@ -428,26 +421,5 @@ function addFileElement(div) {
 	div.appendChild(input);
 }
 
-function saveObjects(){
-	
+function saveObjects(){	
 }
-
-
-/*
-result: {"total_rows":14,"offset":0,"rows":[
-{"value":{"_id":"3db1d06f83bc9eeb1407023190031156","_rev":"3-1fb91ed2a2ee72ee1bb93abd685d68ec","$schema":"http://json-schema.org/draft/2019-09/schema#","$id":"8c148c57925872f233d11639ea023810/base_type:int","title":"int","type":"integer","pattern":"[0-9]$"}},
-{"value":{"_id":"3db1d06f83bc9eeb140702319003b06e","_rev":"2-4dab8603a54524cc2f8a94b3b6396146","$schema":"http://json-schema.org/draft/2019-09/schema#","$id":"8c148c57925872f233d11639ea023810/base_type:bool","title":"bool","type":"boolean"}},
-{"value":{"_id":"3db1d06f83bc9eeb140702319003c493","_rev":"2-cf67840b2b88d513d85fedebd3162146","$schema":"http://json-schema.org/draft/2019-09/schema#","$id":"8c148c57925872f233d11639ea023810/base_type:string","title":"string","type":"string","pattern":"[a-z]$"}},
-{"value":{"_id":"3db1d06f83bc9eeb140702319003fb76","_rev":"2-f747abff8efce73bd05b7bb9c0ac7a18","$schema":"http://json-schema.org/draft/2019-09/schema#","$id":"8c148c57925872f233d11639ea023810/base_type:double","title":"double","type":"number","pattern":"[0-9]$"}},
-{"value":{"_id":"3db1d06f83bc9eeb1407023190043347","_rev":"2-6abb447d7ef339624f66d8c970770a89","$schema":"http://json-schema.org/draft/2019-09/schema#","$id":"8c148c57925872f233d11639ea023810/base_type:float","title":"float","type":"number","pattern":"[0-9]$"}},
-{"value":{"_id":"3db1d06f83bc9eeb1407023190046639","_rev":"2-ca40095eb24bd8f2ee897ad42928a6c2","$schema":"http://json-schema.org/draft/2019-09/schema#","$id":"8c148c57925872f233d11639ea023810/base_type:file","title":"file","type":"string","pattern":"[a-z]$"}},
-{"value":{"_id":"3db1d06f83bc9eeb140702319004a5be","_rev":"4-c00d5f557c81e2a20e8690735664c3af","$schema":"http://json-schema.org/draft/2019-09/schema#","$id":"8c148c57925872f233d11639ea023810/complex:test","title":"test","type":"object","properties":{"one":{"type":"integer","$ref":"8c148c57925872f233d11639ea023810/base_type:int"},"bool_var_two":{"type":"boolean","$ref":"8c148c57925872f233d11639ea023810/base_type:bool"},"enum_var_three":{"type":"string","$ref":"8c148c57925872f233d11639ea023810/enum:medvedev_enum","enum":["outlet","inlet","wall"]}},"required":["one","bool_var_two","enum_var_three"]}},
-{"value":{"_id":"5b706272bb045ab18f0238199a01ac95","_rev":"6-0bec9d5eeea5cbf1215b3156ff22e00b","$schema":"http://json-schema.org/draft/2019-09/schema#","$id":"8c148c57925872f233d11639ea023810/set-of-objects:medvedev_objs","title":"medvedev_objs","type":"array","items":{"anyOf":[{"$ref":"8c148c57925872f233d11639ea023810/base_type:int"},{"$ref":"8c148c57925872f233d11639ea023810/complex:test"},{"$ref":"8c148c57925872f233d11639ea023810/complex:citizen"},{"$ref":"8c148c57925872f233d11639ea023810/base_type:bool"}]}}},
-{"value":{"_id":"5b706272bb045ab18f0238199a01f1b9","_rev":"18-3650e8c27233e8a0b977d3a12e1a4c35","$schema":"http://json-schema.org/draft/2019-09/schema#","$id":"8c148c57925872f233d11639ea023810/complex:citizen","title":"citizen","type":"object","properties":{"tax_payer_number":{"type":"integer","$ref":"8c148c57925872f233d11639ea023810/base_type:int"},"city":{"type":"string","$ref":"8c148c57925872f233d11639ea023810/base_type:string"},"person":{"type":"string","$ref":"8c148c57925872f233d11639ea023810/base_type:file"},"bool_var":{"type":"boolean","$ref":"8c148c57925872f233d11639ea023810/base_type:bool"},"enum_var":{"type":"string","$ref":"8c148c57925872f233d11639ea023810/enum:medvedev_enum","enum":["outlet","inlet","wall"]}},"required":["tax_payer_number","city","person","bool_var","enum_var"]}},
-{"value":{"_id":"5b706272bb045ab18f0238199a0e746f","_rev":"4-9ae252cbaca1ef8ee5f2c3c04b33312d","$schema":"http://json-schema.org/draft/2019-09/schema#","$id":"8c148c57925872f233d11639ea023810/enum:medvedev_enum","title":"medvedev_enum","type":"string","enum":["outlet","inlet","wall"]}},
-{"value":{"_id":"711f66d208f10a7a17887d0af0015107","_rev":"1-3a14e57703a7d56f26499238ea77788e","$schema":"http://json-schema.org/draft/2019-09/schema#","$id":"8c148c57925872f233d11639ea023810/inheritance:test_inheritance","title":"test_inheritance","type":"object","properties":{"inherited_type":{"$ref":"8c148c57925872f233d11639ea023810/complex:test"},"attr1":{"type":"string","$ref":"8c148c57925872f233d11639ea023810/base_type:string"},"attr2":{"type":"string","$ref":"8c148c57925872f233d11639ea023810/enum:medvedev_enum","enum":["outlet","inlet","wall"]},"attr3":{"type":"integer","$ref":"8c148c57925872f233d11639ea023810/base_type:int"}}}},
-{"value":{"_id":"8c148c57925872f233d11639ea7df2e0","_rev":"1-87579896b02b1ca59c64b2db4b7192af","type":{"name":"FHPListOfObstacles","class":"set-of-objects","set_of_possible_object_types":["FHPCircle","FHPBar"]}}},
-{"value":{"_id":"8c148c57925872f233d11639ea7df6f7","_rev":"1-5895b7763816df9683b69b010b5721c5","type":{"name":"FHPBar","class":"complex","fields":[{"name":"x1","type":"integer"},{"name":"y1","type":"integer"},{"name":"x2","type":"integer"},{"name":"y2","type":"integer"}]}}},
-{"value":{"_id":"8c148c57925872f233d11639ea7dffb1","_rev":"1-8ae8d38cf28eb9e003d8152cd08142f9","type":{"name":"FHPCircle","class":"complex","fields":[{"name":"r","type":"integer"},{"name":"x","type":"integer"},{"name":"y","type":"integer"}]}}}
-]}
-*/
